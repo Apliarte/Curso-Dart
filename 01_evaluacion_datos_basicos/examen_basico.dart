@@ -45,7 +45,8 @@ void main(List<String> args) {
 
 
 // 5
-double? decimal;
+/*
+double? decimal=9.8;
 
 void main(List<String> args) {
  
@@ -54,6 +55,62 @@ decimal= 5.0;
 
 
 }
+*/
+
+/*
+//6
+String nombre='jose';
+
+void main() {
+
+print('Hola $nombre');
+
+
+
+}
+*/
+/*
+//7 Pregunta:
+//
+// ¿Qué sucede si intentas asignar un valor de tipo String
+// a una variable de tipo int en Dart?
+*/
+/*String?  variable='hola';
+
+main(){
+
+
+  variable=true;
+}*/
+/*8 Declara una variable int llamada edad
+y asígnale el valor 25.
+Luego, multiplica edad por 2
+y almacena el resultado en una nueva variable int
+llamada edadDoble. Imprime el valor de edadDoble.
+*/
+
+/*int edad=25;
+main(){
+ int edadDoble=edad * 2;
+print(edadDoble);
+
+
+
+ */
+
+
+/*10 Declara una variable double llamada precio
+y asígnale el valor 19.99.
+Luego, incrementa el valor de precio en 5.0
+y almacena el resultado en una nueva variable
+ double llamada nuevoPrecio. Imprime el valor de nuevoPrecio.*/
+
+double precio=19.99;
+double nuevoPrecio=precio+5;
+main(){
+ print(nuevoPrecio);
+}
+
 
 
 
