@@ -6,14 +6,17 @@ Ejemplos:
 14: -14
 -34: 34*/
 
-num opposite(num n){
-if(n>0){
- n=0-n;
-  return n;
-} else{ n=  n.abs();
-  return n;
-}
-}
-main(){
+// num opposite(num n) {
+//   if (n > 0) {
+//     n = 0 - n;
+//     return n;
+//   } else {
+//     n = n.abs();
+//     return n;
+//   }
+// }
+num opposite(num n) =>n*-1;
 
-  print(opposite(78));}
+main() {
+  print(opposite(-78));
+}
