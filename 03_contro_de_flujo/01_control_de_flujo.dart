@@ -12,8 +12,8 @@ print('escribe un número entero  para averiguar si es par o impar');
 int? numero;
  do{
    stdout.write('Introduce un número: ');
-numero = int.tryParse(stdin.readLineSync()!);
     if (numero == null) {
+numero = int.tryParse(stdin.readLineSync()!);
       print('Eso no era un numero, vuelve a intentarlo');
     }
   }while(numero == null);
