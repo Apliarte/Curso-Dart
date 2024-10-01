@@ -23,7 +23,6 @@ class Pajaro implements Volador {
 }
 
 void main() {
-  Volador volador = Volador();
   Pajaro pajaro = Pajaro();
   pajaro.volar();
 }
