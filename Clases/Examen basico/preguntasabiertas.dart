@@ -11,8 +11,8 @@
 
 ---*/
 class Volador {
-  void volar() {
-  }
+  void volar()       {}
+
 }
 
 class Pajaro implements Volador {
