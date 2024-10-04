@@ -95,6 +95,27 @@ int count_ocurrences(String car, String cad) {
   return n;
 }
 
+String strReplaceFor(String cad, String car, String rep) {
+  String buffer = '';
+  for (String c in stringToList(cad)) {
+    buffer += c == car ? rep : c;
+  }
+  return buffer;
+}
+
+num spanishNumberStrToDouble(String cad) {
+  cad = strReplaceFor(cad, '.', '');
+  cad = strReplaceFor(cad, ',', '.');
+  
+
+
+
+  num d = num.tryParse(cad) ?? 0;
+  
+  return d;
+}
+
+// validaciones de numeros en formato español
 bool isValidSpanishNumberCharset(String cad) {
   return validCharset(cad, SPANISH_NUMBER_CHARSET);
 }
@@ -115,6 +136,9 @@ bool validDecimalPart(String cad) {
   List<String> parts = strSplit(cad, ',');
   if (length(strSplit(cad, ',')) < 2) {
     return true;
+
+
+
   }
   return validCharset(parts[1], INT_NUMBER_CHARSET);
 }
@@ -140,41 +164,10 @@ bool validIntPart(String cad) {
   return true;
 }
 
-String strReplaceFor(String cad, String car, String rep) {
-  String buffer = '';
-  for (String c in stringToList(cad)) {
-    buffer += c == car ? rep : c;
-  }
-  return buffer;
-}
-
-double spanishNumberStrToDouble(String spanishNumberStr) {
-  String demo = "hola";
-  double d = 8;
-  return d;
-}
-
-
-
-String getValidSpanishNumberStr(String ask) {
-  String userInput = getUserInput(
-      ask,
-      [
-        isValidSpanishNumberCharset,
-        startWithNumber,
-        endWithNumber,
-        less_than_two_comma,
-        validDecimalPart,
-        validIntPart
-      ],
-      'El texto introducido no corresponde a un número válido en formato Español,\nInténtalo de nuevo.');
-  return userInput;
-}
-bool sinPuntosCOnsecutivos(String cad) {
+bool sinPuntosConsecutivos1(String cad) {
   bool punto = false;
   for (int i = 0; i < length(cad); i++) {
     if (punto == true && cad[i] == '.') {
-      // siempre toda la puta vida es true
       return false;
     }
     if (cad[i] == '.') {
@@ -185,18 +178,47 @@ bool sinPuntosCOnsecutivos(String cad) {
   }
   return true;
 }
-void main() {
-  //print('Calculadora');
-  print(sinPuntosCOnsecutivos('1.1.1.'));
-  // Pedimos un numero
-  // String raw_num_1 =
-  //     getValidSpanishNumberStr('Por favor, indica el primer número: ');
-  // print(raw_num_1);
-  // Pedimos otro numero
-  // String raw_num_2 =
-  //     getValidSpanishNumberStr('Por favor, indica el segundo número: ');
-  // print(raw_num_2);
 
+bool sinPuntosConsecutivos(String cad) {
+  for (int i = 1; i < length(cad); i++) {
+    if (cad[i] == cad[i - 1]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+String getValidSpanishNumberStr(String ask) {
+  String userInput = getUserInput(
+      ask,
+      [
+        isValidSpanishNumberCharset,
+        startWithNumber,
+        endWithNumber,
+        less_than_two_comma,
+        validDecimalPart,
+        validIntPart,
+        sinPuntosConsecutivos
+      ],
+      'El texto introducido no corresponde a un número válido en formato Español,\nInténtalo de nuevo.');
+  return userInput;
+}
+
+void main() {
+  print('Calculadora');
+
+  // Pedimos un numero
+  String raw_num_1 =
+      getValidSpanishNumberStr('Por favor, indica el primer número: ');
+  print(raw_num_1);
+  // Pedimos otro numero
+  String raw_num_2 =
+      getValidSpanishNumberStr('Por favor, indica el segundo número: ');
+  print(raw_num_2); 
+  // traducir a dart las cadenas
+  num num_1 = spanishNumberStrToDouble(raw_num_1);
+  num num_2 = spanishNumberStrToDouble(raw_num_2);
+print('los numeros son $num_2 y $num_1');
   // Sumamos los dos numeros
 
   // Mostramos el resultado
