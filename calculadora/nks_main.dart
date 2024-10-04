@@ -16,6 +16,7 @@ String getUserInput(
         if (!check(buffer)) {
           print(invalid_check);
           buffer = '';
+          break;
         }
       }
     }
@@ -103,8 +104,7 @@ bool startWithNumber(String cad) {
 }
 
 bool endWithNumber(String cad) {
-    print('EL valor del parametro es ${ cad }');
-    return true;
+  return !(cad[length(cad) - 1] == ',' || cad[length(cad) - 1] == '.');
 }
 
 bool less_than_two_comma(String cad) {
@@ -140,9 +140,25 @@ bool validIntPart(String cad) {
   return true;
 }
 
-String demo() {
+String strReplaceFor(String cad, String car, String rep) {
+  String buffer = '';
+  for (String c in stringToList(cad)) {
+    buffer += c == car ? rep : c;
+  }
+  return buffer;
+}
+
+double spanishNumberStrToDouble(String spanishNumberStr) {
+  String demo = "hola";
+  double d = 8;
+  return d;
+}
+
+
+
+String getValidSpanishNumberStr(String ask) {
   String userInput = getUserInput(
-      'Por favor, indica el primer número: ',
+      ask,
       [
         isValidSpanishNumberCharset,
         startWithNumber,
@@ -154,13 +170,32 @@ String demo() {
       'El texto introducido no corresponde a un número válido en formato Español,\nInténtalo de nuevo.');
   return userInput;
 }
-
+bool sinPuntosCOnsecutivos(String cad) {
+  bool punto = false;
+  for (int i = 0; i < length(cad); i++) {
+    if (punto == true && cad[i] == '.') {
+      // siempre toda la puta vida es true
+      return false;
+    }
+    if (cad[i] == '.') {
+      punto = true;
+    } else {
+      punto = false;
+    }
+  }
+  return true;
+}
 void main() {
   //print('Calculadora');
+  print(sinPuntosCOnsecutivos('1.1.1.'));
   // Pedimos un numero
-  String raw_num_1 = demo();
-  print(raw_num_1);
+  // String raw_num_1 =
+  //     getValidSpanishNumberStr('Por favor, indica el primer número: ');
+  // print(raw_num_1);
   // Pedimos otro numero
+  // String raw_num_2 =
+  //     getValidSpanishNumberStr('Por favor, indica el segundo número: ');
+  // print(raw_num_2);
 
   // Sumamos los dos numeros
 
