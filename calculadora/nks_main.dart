@@ -14,7 +14,7 @@ String getUserInput(
     } else {
       for (Function check in checks) {
         if (!check(buffer)) {
-          print(invalid_check);
+          print('$buffer--- $invalid_check');
           buffer = '';
           break;
         }
@@ -103,15 +103,12 @@ String strReplaceFor(String cad, String car, String rep) {
   return buffer;
 }
 
-num spanishNumberStrToDouble(String cad) {
+num spanishNumberStrToDartNumber(String cad) {
   cad = strReplaceFor(cad, '.', '');
   cad = strReplaceFor(cad, ',', '.');
-  
-
-
 
   num d = num.tryParse(cad) ?? 0;
-  
+
   return d;
 }
 
@@ -136,9 +133,6 @@ bool validDecimalPart(String cad) {
   List<String> parts = strSplit(cad, ',');
   if (length(strSplit(cad, ',')) < 2) {
     return true;
-
-
-
   }
   return validCharset(parts[1], INT_NUMBER_CHARSET);
 }
@@ -161,6 +155,7 @@ bool validIntPart(String cad) {
       }
     }
   }
+  // print('validIntPart');
   return true;
 }
 
@@ -180,11 +175,14 @@ bool sinPuntosConsecutivos1(String cad) {
 }
 
 bool sinPuntosConsecutivos(String cad) {
-  for (int i = 1; i < length(cad); i++) {
-    if (cad[i] == cad[i - 1]) {
+  for (int i = 0; i < length(cad) - 1; i++) {
+    if (stringToList(cad)[i] == '.' && stringToList(cad)[i + 1] == '.') {
+      print('${stringToList(cad)[i]} y ${stringToList(cad)[i++]}');
       return false;
     }
+    print('${stringToList(cad)[i]} y ${stringToList(cad)[i++]}');
   }
+
   return true;
 }
 
@@ -198,28 +196,58 @@ String getValidSpanishNumberStr(String ask) {
         less_than_two_comma,
         validDecimalPart,
         validIntPart,
-        sinPuntosConsecutivos
+        sinPuntosConsecutivos1
       ],
       'El texto introducido no corresponde a un número válido en formato Español,\nInténtalo de nuevo.');
   return userInput;
 }
 
+String darNumberToSpanishNumber(num numeroDart) {
+  return strReplaceFor('$numeroDart', '.', ',');
+}
+
+String enteroToSpanishNumber(int numeroEnter) {
+// 22012 a 22.012
+
+// cada tres caracteres de derecha a izquierda poner un punto
+  for (int i = length('$numeroEnter')-1; i >= 0; i--) {
+    while (i != null&& i-1 != null&& i-2 != null){
+    
+    
+    
+    
+    };
+  }
+  return '';
+}
+
+String invertirCadena(String cad) {
+  String cadenaInvertida = '';
+  for (int i = length(cad)-1; i >=0; i--) {
+    cadenaInvertida += cad[i];
+  }
+  return cadenaInvertida;
+}
+
 void main() {
   print('Calculadora');
-
-  // Pedimos un numero
+  print(invertirCadena(invertirCadena('Apliarte')));
+  /* // Pedimos un numero
   String raw_num_1 =
       getValidSpanishNumberStr('Por favor, indica el primer número: ');
   print(raw_num_1);
   // Pedimos otro numero
   String raw_num_2 =
       getValidSpanishNumberStr('Por favor, indica el segundo número: ');
-  print(raw_num_2); 
+  print(raw_num_2);
   // traducir a dart las cadenas
-  num num_1 = spanishNumberStrToDouble(raw_num_1);
-  num num_2 = spanishNumberStrToDouble(raw_num_2);
-print('los numeros son $num_2 y $num_1');
-  // Sumamos los dos numeros
+  num num_1 = spanishNumberStrToDartNumber(raw_num_1);
+  num num_2 = spanishNumberStrToDartNumber(raw_num_2);
 
+  print('''los numeros son los numeros escritos en español 
+y traducidos a dart:  $num_1 y $num_2''');
+  print('el resultado es ${num_1 + num_2}');
+  // Sumamos los dos numeros
+ */
   // Mostramos el resultado
 }
