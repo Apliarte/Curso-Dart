@@ -203,27 +203,34 @@ String getValidSpanishNumberStr(String ask) {
 }
 
 String darNumberToSpanishNumber(num numeroDart) {
-  return strReplaceFor('$numeroDart', '.', ',');
+  String entero = enteroToSpanishNumber(strReplaceFor('$numeroDart', '.', ',')[0]);
+  String decimal = strReplaceFor('$numeroDart', '.', ',')[1];
+  
+  return entero + decimal;
 }
 
-String enteroToSpanishNumber(int numeroEnter) {
+String enteroToSpanishNumber(String numeroEnter) {
 // 22012 a 22.012
-
-// cada tres caracteres de derecha a izquierda poner un punto
-  for (int i = length('$numeroEnter')-1; i >= 0; i--) {
-    while (i != null&& i-1 != null&& i-2 != null){
-    
-    
-    
-    
-    };
+  String buffer = '';
+  String numAlReves = invertirCadena('$numeroEnter');
+  int separa = 0;
+  for (int i = 0; i < length(numAlReves); i++) {
+    print(buffer);
+    if (separa < 3) {
+      buffer += numAlReves[i];
+      separa++;
+    }
+    if (separa == 3 && i != length(numAlReves) - 1) {
+      buffer += '.';
+      separa = 0;
+    }
   }
-  return '';
+  return invertirCadena(buffer);
 }
 
 String invertirCadena(String cad) {
   String cadenaInvertida = '';
-  for (int i = length(cad)-1; i >=0; i--) {
+  for (int i = length(cad) - 1; i >= 0; i--) {
     cadenaInvertida += cad[i];
   }
   return cadenaInvertida;
@@ -231,8 +238,7 @@ String invertirCadena(String cad) {
 
 void main() {
   print('Calculadora');
-  print(invertirCadena(invertirCadena('Apliarte')));
-  /* // Pedimos un numero
+
   String raw_num_1 =
       getValidSpanishNumberStr('Por favor, indica el primer número: ');
   print(raw_num_1);
@@ -246,8 +252,10 @@ void main() {
 
   print('''los numeros son los numeros escritos en español 
 y traducidos a dart:  $num_1 y $num_2''');
-  print('el resultado es ${num_1 + num_2}');
+  String resultadoInt = darNumberToSpanishNumber(num_1 + num_2);
+ 
+  print('el resultado es $resultadoInt');
   // Sumamos los dos numeros
- */
+
   // Mostramos el resultado
 }
