@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import '../01_evaluacion_datos_basicos/01_variables/tipos_de_variables.dart';
+
 const String SPANISH_NUMBER_CHARSET = '0123456789,.';
 const String INT_NUMBER_CHARSET = '0123456789';
 
@@ -203,28 +205,34 @@ String getValidSpanishNumberStr(String ask) {
 }
 
 String darNumberToSpanishNumber(num numeroDart) {
-  String entero = enteroToSpanishNumber(strReplaceFor('$numeroDart', '.', ',')[0]);
-  String decimal = strReplaceFor('$numeroDart', '.', ',')[1];
-  
-  return entero + decimal;
+  List numeroConComa = strSplit('$numeroDart', '.');
+
+  if (length(numeroConComa) == 2) {
+    String entero = '${numeroConComa[0]}';
+    String decimal = '${numeroConComa[1]}';
+    String enterocCOnPuntos = enteroToSpanishNumber(entero);
+    return enterocCOnPuntos + ',' + decimal;
+  }
+
+  return enteroToSpanishNumber('$numeroDart');
 }
 
 String enteroToSpanishNumber(String numeroEnter) {
 // 22012 a 22.012
   String buffer = '';
-  String numAlReves = invertirCadena('$numeroEnter');
+  String numAlReves = invertirCadena(numeroEnter);
   int separa = 0;
   for (int i = 0; i < length(numAlReves); i++) {
-    print(buffer);
+    if (separa == 3) {
+      buffer += '.';
+      separa = 0;
+    }
     if (separa < 3) {
       buffer += numAlReves[i];
       separa++;
     }
-    if (separa == 3 && i != length(numAlReves) - 1) {
-      buffer += '.';
-      separa = 0;
-    }
   }
+
   return invertirCadena(buffer);
 }
 
@@ -252,10 +260,13 @@ void main() {
 
   print('''los numeros son los numeros escritos en español 
 y traducidos a dart:  $num_1 y $num_2''');
-  String resultadoInt = darNumberToSpanishNumber(num_1 + num_2);
- 
-  print('el resultado es $resultadoInt');
+
   // Sumamos los dos numeros
+  num resultado = num_1 + num_2;
+
+  print('resultado en dart $resultado');
+
+  print('resultado en estañol ${darNumberToSpanishNumber(resultado)}');
 
   // Mostramos el resultado
 }
