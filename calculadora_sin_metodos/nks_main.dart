@@ -1,6 +1,8 @@
+/*
+Haz un programa que te pida dos números,
+ use una función suma para devolver el resultado
+ y si es escrito en español que devuelva el resultado en español*/
 import 'dart:io';
-
-import '../01_evaluacion_datos_basicos/01_variables/tipos_de_variables.dart';
 
 const String SPANISH_NUMBER_CHARSET = '0123456789,.';
 const String INT_NUMBER_CHARSET = '0123456789';
@@ -106,12 +108,36 @@ String strReplaceFor(String cad, String car, String rep) {
 }
 
 num spanishNumberStrToDartNumber(String cad) {
+  //1000,20--->1000.2
   cad = strReplaceFor(cad, '.', '');
   cad = strReplaceFor(cad, ',', '.');
 
-  num d = num.tryParse(cad) ?? 0;
+  return num.tryParse(cad) ?? 0;
+}
 
-  return d;
+num parsearStringAnumero(String cad) {
+  Map map = {
+    '0': 0,
+    '1': 1,
+    '2': 2,
+    '3': 3,
+    '4': 4,
+    '5': 5,
+    '6': 6,
+    '7': 7,
+    '8': 8,
+    '9': 9
+  };
+
+  for (int i = 0; i < length(cad); i++) {
+    for (int c = 0; i < length(map); i++) {
+      if (cad[i] == map['$i']) {
+        print(cad[i]);
+        print(map['$i']);
+      }
+    }
+  }
+  return 0;
 }
 
 // validaciones de numeros en formato español
@@ -135,7 +161,7 @@ bool validDecimalPart(String cad) {
   List<String> parts = strSplit(cad, ',');
   if (length(strSplit(cad, ',')) < 2) {
     return true;
-  }
+  } //12,12
   return validCharset(parts[1], INT_NUMBER_CHARSET);
 }
 
@@ -179,10 +205,8 @@ bool sinPuntosConsecutivos1(String cad) {
 bool sinPuntosConsecutivos(String cad) {
   for (int i = 0; i < length(cad) - 1; i++) {
     if (stringToList(cad)[i] == '.' && stringToList(cad)[i + 1] == '.') {
-      print('${stringToList(cad)[i]} y ${stringToList(cad)[i++]}');
       return false;
     }
-    print('${stringToList(cad)[i]} y ${stringToList(cad)[i++]}');
   }
 
   return true;
@@ -245,6 +269,7 @@ String invertirCadena(String cad) {
 }
 
 void main() {
+  /* 
   print('Calculadora');
 
   String raw_num_1 =
@@ -259,14 +284,17 @@ void main() {
   num num_2 = spanishNumberStrToDartNumber(raw_num_2);
 
   print('''los numeros son los numeros escritos en español 
-y traducidos a dart:  $num_1 y $num_2''');
+ya traducidos a dart:  $num_1 y $num_2''');
 
   // Sumamos los dos numeros
   num resultado = num_1 + num_2;
 
   print('resultado en dart $resultado');
-
-  print('resultado en estañol ${darNumberToSpanishNumber(resultado)}');
-
   // Mostramos el resultado
+  print('resultado en estañol ${darNumberToSpanishNumber(resultado)}');
+// escribe !repo en el chat para ver
+//el codigo completo del proyecto 'Curso Dart'
+ */
+//¿ahora que hacemos codewar? COMENTA
+  print(parsearStringAnumero('56745'));
 }
