@@ -4,9 +4,22 @@ Haz un programa que te pida dos números,
  y si es escrito en español que devuelva el resultado en español*/
 import 'dart:io';
 
+import '../01_evaluacion_datos_basicos/01_variables/tipos_de_variables.dart';
+
 const String SPANISH_NUMBER_CHARSET = '0123456789,.';
 const String INT_NUMBER_CHARSET = '0123456789';
-
+Map mapNumeros = {
+  '0': 0,
+  '1': 1,
+  '2': 2,
+  '3': 3,
+  '4': 4,
+  '5': 5,
+  '6': 6,
+  '7': 7,
+  '8': 8,
+  '9': 9
+};
 String getUserInput(
     String msg, List<Function(String)> checks, String invalid_check) {
   String buffer = '';
@@ -34,6 +47,19 @@ int length(dynamic cadena) {
   try {
     while (true) {
       cadena[n];
+      n++;
+    }
+  } catch (e) {
+    print(e);
+  }
+  return n;
+}
+
+int lengthMap(Map mapa) {
+  int n = 0;
+  try {
+    while (true) {
+      mapa['$n']==n;
       n++;
     }
   } catch (e) {}
@@ -116,28 +142,22 @@ num spanishNumberStrToDartNumber(String cad) {
 }
 
 num parsearStringAnumero(String cad) {
-  Map map = {
-    '0': 0,
-    '1': 1,
-    '2': 2,
-    '3': 3,
-    '4': 4,
-    '5': 5,
-    '6': 6,
-    '7': 7,
-    '8': 8,
-    '9': 9
-  };
-
+  num numero = 0;
   for (int i = 0; i < length(cad); i++) {
-    for (int c = 0; i < length(map); i++) {
-      if (cad[i] == map['$i']) {
-        print(cad[i]);
-        print(map['$i']);
-      }
+    if (elMapaContieneElNum(cad[i], mapNumeros)) {
+      numero += i;
     }
   }
-  return 0;
+  return numero;
+}
+
+bool elMapaContieneElNum(String car, Map mapaStrinNum) {
+  for (int i = 0; i < length(mapaStrinNum); i++) {
+    if (i == mapaStrinNum[car]) {
+      return true;
+    }
+  }
+  return false;
 }
 
 // validaciones de numeros en formato español
@@ -296,5 +316,7 @@ ya traducidos a dart:  $num_1 y $num_2''');
 //el codigo completo del proyecto 'Curso Dart'
  */
 //¿ahora que hacemos codewar? COMENTA
-  print(parsearStringAnumero('56745'));
+
+  print(elMapaContieneElNum('9', mapNumeros));
+
 }
