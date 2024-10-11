@@ -4,7 +4,8 @@ Haz un programa que te pida dos números,
  y si es escrito en español que devuelva el resultado en español*/
 import 'dart:io';
 
-import '../01_evaluacion_datos_basicos/01_variables/tipos_de_variables.dart';
+import 'enviadopor_whtsapp.dart';
+
 
 const String SPANISH_NUMBER_CHARSET = '0123456789,.';
 const String INT_NUMBER_CHARSET = '0123456789';
@@ -50,21 +51,11 @@ int length(dynamic cadena) {
       n++;
     }
   } catch (e) {
-    print(e);
+   
   }
   return n;
 }
 
-int lengthMap(Map mapa) {
-  int n = 0;
-  try {
-    while (true) {
-      mapa['$n']==n;
-      n++;
-    }
-  } catch (e) {}
-  return n;
-}
 
 List<String> stringToList(String cadena) {
   List<String> buffer = [];
@@ -138,7 +129,7 @@ num spanishNumberStrToDartNumber(String cad) {
   cad = strReplaceFor(cad, '.', '');
   cad = strReplaceFor(cad, ',', '.');
 
-  return num.tryParse(cad) ?? 0;
+  return textoNumero(cad);
 }
 
 num parsearStringAnumero(String cad) {
@@ -289,7 +280,7 @@ String invertirCadena(String cad) {
 }
 
 void main() {
-  /* 
+  
   print('Calculadora');
 
   String raw_num_1 =
@@ -314,9 +305,9 @@ ya traducidos a dart:  $num_1 y $num_2''');
   print('resultado en estañol ${darNumberToSpanishNumber(resultado)}');
 // escribe !repo en el chat para ver
 //el codigo completo del proyecto 'Curso Dart'
- */
+ 
 //¿ahora que hacemos codewar? COMENTA
 
-  print(elMapaContieneElNum('9', mapNumeros));
+  
 
 }
