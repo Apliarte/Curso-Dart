@@ -21,18 +21,57 @@ our team always plays 10 matches in the championship
 Los resultados de los partidos de nuestro equipo 
 se registran en una colección de cadenas. 
 Cada partido está representado por una cadena 
-con el formato «x:y», donde x es la puntuación de nuestro equipo 
+con el formato [x:y], donde x es la puntuación de nuestro equipo 
 e y es la puntuación de nuestro rival.
-Por ejemplo: [«3:1», «2:2», «0:1», ...]
+Por ejemplo: [[3:1], [2:2], [0:1], ...]
 Los puntos se otorgan por cada partido de la siguiente manera
-
 si x > y: 3 puntos (victoria)
 si x < y: 0 puntos (derrota)
 si x = y: 1 punto (empate)
-Necesitamos escribir una función que tome esta colección y devuelva el número de puntos que nuestro equipo (x) obtuvo en el campeonato según las reglas dadas anteriormente.
+Necesitamos escribir una función que tome esta colección 
+y devuelva el número de puntos que nuestro equipo (x) obtuvo en el campeonato 
+según las reglas dadas anteriormente.
 
 Notas:
 
 nuestro equipo siempre juega 10 partidos en el campeonato
 0 <= x <= 4
 0 <= y <= 4 */
+List<String> juegos = [
+  '0:0',
+  '0:0',
+  '0:0',
+  '0:0',
+  '0:0',
+  '0:0',
+  '0:0',
+  '0:0',
+  '0:0',
+  '0:0'
+];
+int points(List<String> games) {
+  int resultado = 0;
+
+  for (int i = 0; i < games.length ; i++) {
+    if ((int.parse(games[i].split(':')[0])) <
+        (int.parse(games[i].split(':')[1]))) {
+      resultado += 0;
+    }
+    if ((int.parse(games[i].split(':')[0])) >
+        (int.parse(games[i].split(':')[1]))) {
+      resultado += 3;
+    }
+    if ((int.parse(games[i].split(':')[0])) ==
+        (int.parse(games[i].split(':')[1]))) {
+      resultado += 1;
+    }
+  }
+
+  return resultado;
+}
+
+main() {
+ int resul= points(juegos);
+  
+  print(resul);
+}
